@@ -1,8 +1,8 @@
-# bbugyi-toolong task runner
+# toobig task runner
 
 venv_dir := ".venv"
 venv_bin := venv_dir / "bin"
-python := env_var_or_default("TOOLONG_PYTHON", "3.10")
+python := env_var_or_default("TOOBIG_PYTHON", "3.10")
 
 default:
     @just --list

@@ -62,24 +62,24 @@ jobs:
         run: uv python install 3.12
       - name: Install the wheel in a fresh environment
         run: |
-          uv venv --python 3.12 /tmp/toolong-smoke
-          uv pip install --python /tmp/toolong-smoke/bin/python dist/*.whl
+          uv venv --python 3.12 /tmp/toobig-smoke
+          uv pip install --python /tmp/toobig-smoke/bin/python dist/*.whl
       - name: Exercise the installed CLI
         run: |
           set -euo pipefail
 
-          /tmp/toolong-smoke/bin/toolong --help
+          /tmp/toobig-smoke/bin/toobig --help
           fixture="$(mktemp -d)"
           printf 'fn main() {}\n// 2\n// 3\n// 4\n// 5\n// 6\n' > "${fixture}/large.rs"
           : > "${fixture}/small.py"
 
-          /tmp/toolong-smoke/bin/toolong "${fixture}" 5 3 1 > /tmp/toolong-ok.out 2> /tmp/toolong-ok.err
+          /tmp/toobig-smoke/bin/toobig "${fixture}" 5 3 1 > /tmp/toobig-ok.out 2> /tmp/toobig-ok.err
 
           status=0
-          /tmp/toolong-smoke/bin/toolong --include '*.rs' "${fixture}" 5 3 1 \
-            > /tmp/toolong-violation.out 2> /tmp/toolong-violation.err || status=$?
+          /tmp/toobig-smoke/bin/toobig --include '*.rs' "${fixture}" 5 3 1 \
+            > /tmp/toobig-violation.out 2> /tmp/toobig-violation.err || status=$?
           test "${status}" -eq 1
-          grep -Fq "VIOLATION: ${fixture}/large.rs has 6 lines (limit: 5)" /tmp/toolong-violation.err
+          grep -Fq "VIOLATION: ${fixture}/large.rs has 6 lines (limit: 5)" /tmp/toobig-violation.err
 
   publish:
     needs: [release, build, install-smoke]

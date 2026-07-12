@@ -1,37 +1,37 @@
-# toolong
+# toobig
 
-[![CI](https://github.com/bbugyi200/toolong/actions/workflows/ci.yml/badge.svg)](https://github.com/bbugyi200/toolong/actions/workflows/ci.yml)
-[![PyPI version](https://img.shields.io/pypi/v/bbugyi-toolong.svg)](https://pypi.org/project/bbugyi-toolong/)
-[![Python versions](https://img.shields.io/pypi/pyversions/bbugyi-toolong.svg)](https://pypi.org/project/bbugyi-toolong/)
-[![License: MIT](https://img.shields.io/pypi/l/bbugyi-toolong.svg)](LICENSE)
+[![CI](https://github.com/bbugyi200/toobig/actions/workflows/ci.yml/badge.svg)](https://github.com/bbugyi200/toobig/actions/workflows/ci.yml)
+[![PyPI version](https://img.shields.io/pypi/v/toobig.svg)](https://pypi.org/project/toobig/)
+[![Python versions](https://img.shields.io/pypi/pyversions/toobig.svg)](https://pypi.org/project/toobig/)
+[![License: MIT](https://img.shields.io/pypi/l/toobig.svg)](LICENSE)
 
-`toolong` is a fast, dependency-free line-limit linter for any text-based source language. It applies graduated
+`toobig` is a fast, dependency-free line-limit linter for any text-based source language. It applies graduated
 thresholds so a file can become visible before it becomes a hard failure.
 
 Small files are easier for people to review, navigate, test, and refactor. They also fit more readily into the context
-windows used by coding agents and LLM tools, leaving more room for the task, related code, and test output. `toolong`
+windows used by coding agents and LLM tools, leaving more room for the task, related code, and test output. `toobig`
 turns that shared maintainability constraint into a simple, automatable check.
 
 ## Quick start
 
-Install the `toolong` command with [uv](https://docs.astral.sh/uv/):
+Install the `toobig` command with [uv](https://docs.astral.sh/uv/):
 
 ```console
-uv tool install bbugyi-toolong
+uv tool install toobig
 ```
 
 Or install it with pipx or pip:
 
 ```console
-pipx install bbugyi-toolong
+pipx install toobig
 # or, inside a virtual environment
-python -m pip install bbugyi-toolong
+python -m pip install toobig
 ```
 
 Scan Python files under `src/`, failing when any file exceeds 1,000 lines:
 
 ```console
-toolong src 1000 850 700
+toobig src 1000 850 700
 ```
 
 The three limits are the hard, warning, and informational thresholds, in that order. The default include pattern is
@@ -40,7 +40,7 @@ The three limits are the hard, warning, and informational thresholds, in that or
 ## Usage
 
 ```text
-toolong [-v]... [--include GLOB]... [--files-only] DIRECTORY LINE_LIMIT WARNING_LIMIT INFO_LIMIT
+toobig [-v]... [--include GLOB]... [--files-only] DIRECTORY LINE_LIMIT WARNING_LIMIT INFO_LIMIT
 ```
 
 Patterns match file basenames and can be repeated. The scan is recursive, includes hidden files, and does not follow
@@ -49,14 +49,14 @@ symlinks or apply `.gitignore` rules.
 For a Python project:
 
 ```console
-toolong src 1000 850 700
-toolong --include '*.py' --include '*.pyi' src 1000 850 700
+toobig src 1000 850 700
+toobig --include '*.py' --include '*.pyi' src 1000 850 700
 ```
 
 For a Rust project:
 
 ```console
-toolong --include '*.rs' crates 800 650 500
+toobig --include '*.rs' crates 800 650 500
 ```
 
 Use `-v` to include `OK` lines for files below every threshold. Use `-vv` for additional diagnostics about the scan.
@@ -87,7 +87,7 @@ Threshold comparisons are strict. A file exactly at a threshold does not enter t
 the normal scan's exit code and emits no log output, making it suitable for scripts:
 
 ```console
-toolong --files-only src 1000 850 700 | xargs -r editor
+toobig --files-only src 1000 850 700 | xargs -r editor
 ```
 
 When there are no files above the informational threshold, stdout is empty.
@@ -97,8 +97,8 @@ When there are no files above the informational threshold, stdout is empty.
 A small Justfile recipe keeps the project policy easy to run locally and in CI:
 
 ```just
-toolong:
-    uvx --from bbugyi-toolong toolong src 1000 850 700
+toobig:
+    uvx --from toobig toobig src 1000 850 700
 ```
 
 Then call the same recipe from GitHub Actions:
@@ -106,10 +106,10 @@ Then call the same recipe from GitHub Actions:
 ```yaml
 - uses: astral-sh/setup-uv@v4
 - uses: extractions/setup-just@v3
-- run: just toolong
+- run: just toobig
 ```
 
-Pin `bbugyi-toolong` to the version range appropriate for your project when reproducibility is important.
+Pin `toobig` to the version range appropriate for your project when reproducibility is important.
 
 ## Development
 
@@ -129,8 +129,8 @@ just check
 Commits and pull-request titles follow [Conventional Commits](https://www.conventionalcommits.org/). On every push to
 `master`, release-please updates or opens a release pull request containing the next version and changelog. Merging
 that pull request creates the GitHub release, builds and smoke-tests both distributions, and publishes
-`bbugyi-toolong` to PyPI using trusted publishing (GitHub Actions OIDC), without a long-lived PyPI token.
+`toobig` to PyPI using trusted publishing (GitHub Actions OIDC), without a long-lived PyPI token.
 
 ## License
 
-`toolong` is available under the [MIT License](LICENSE).
+`toobig` is available under the [MIT License](LICENSE).

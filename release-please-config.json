@@ -8,7 +8,7 @@
   "extra-files": [
     {
       "type": "generic",
-      "path": "src/bbugyi_toolong/__init__.py"
+      "path": "src/toobig/__init__.py"
     }
   ],
   "packages": {

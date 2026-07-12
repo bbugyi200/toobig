@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from bbugyi_toolong.cli import run
+from toobig.cli import run
 
 
 class TtyBuffer(io.StringIO):
@@ -96,7 +96,7 @@ def test_missing_argument_is_argparse_usage_error(capsys: pytest.CaptureFixture[
         run([])
 
     assert error.value.code == 2
-    assert "usage: toolong" in capsys.readouterr().err
+    assert "usage: toobig" in capsys.readouterr().err
 
 
 def test_no_color_disables_color_on_tty(tmp_path: Path) -> None:

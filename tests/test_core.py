@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from bbugyi_toolong.core import (
+from toobig.core import (
     Classification,
     Counts,
     FileResult,

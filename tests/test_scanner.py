@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from bbugyi_toolong.core import Classification, Thresholds
-from bbugyi_toolong.scanner import count_newlines, scan
+from toobig.core import Classification, Thresholds
+from toobig.scanner import count_newlines, scan
 
 
 def test_count_newlines_matches_wc_semantics(tmp_path: Path) -> None:

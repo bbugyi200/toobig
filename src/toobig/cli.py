@@ -1,4 +1,4 @@
-"""Command-line interface for toolong."""
+"""Command-line interface for toobig."""
 
 from __future__ import annotations
 
@@ -9,14 +9,14 @@ from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import TextIO
 
-from bbugyi_toolong.core import (
+from toobig.core import (
     Classification,
     Thresholds,
     count_results,
     format_result,
     summary,
 )
-from bbugyi_toolong.scanner import scan
+from toobig.scanner import scan
 
 _COLORS = {
     "debug": "\033[35m",
@@ -45,7 +45,7 @@ def build_parser() -> argparse.ArgumentParser:
     """Construct the argument parser."""
 
     parser = argparse.ArgumentParser(
-        prog="toolong",
+        prog="toobig",
         description="Enforce graduated line-count limits for source files.",
     )
     parser.add_argument("-v", "--verbose", action="count", default=0)

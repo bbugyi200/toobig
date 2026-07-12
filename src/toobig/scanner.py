@@ -7,7 +7,7 @@ import os
 from collections.abc import Iterator, Sequence
 from pathlib import Path
 
-from bbugyi_toolong.core import FileResult, Thresholds, classify
+from toobig.core import FileResult, Thresholds, classify
 
 _CHUNK_SIZE = 1024 * 1024
 
